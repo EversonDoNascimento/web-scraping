@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
 import requests
 import os
-import zipfile
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from utils.compressToZip import compressToZip
+
 # import shutil
 
 pdf_dir = '../data/anexos'
@@ -27,14 +30,10 @@ if(response.status_code == 200):
             downloaded_files.append(out_anexo1)
             downloaded_files.append(out_anexo2)
             print("Download dos anexos concluído com sucesso!")
-            with zipfile.ZipFile(zip_path, 'w') as zip:
-                for file_path in downloaded_files:
-                    arcname = os.path.basename(file_path)
-                    zip.write(file_path, arcname=arcname)
+            compressToZip(downloaded_files, zip_path)
             # shutil.rmtree(pdf_dir)
         else:
-            print(f'Error ao baixar os PDFs: código {pdf_anexo1.status_code} e {pdf_anexo2.status_code}')
-        
+            print(f'Error ao baixar os PDFs: código {pdf_anexo1.status_code} e {pdf_anexo2.status_code}')   
     else:
         print('Links não encontrados!')
 else:
