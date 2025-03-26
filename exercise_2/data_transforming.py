@@ -1,10 +1,14 @@
 import pdfplumber
 import pandas as pd
 import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from utils.compressToZip import compressToZip
 
 path_pdf = "../data/anexos/anexo_I.pdf"
 output_original_file_path = "../data/data_transformed.csv"
-output_edited_file_path = "../data/data_transformed2.csv"
+output_edited_file_path = "../data/data_transformed_edited_columns.csv"
+output_zip_path = "../data/Teste_Everson_Do_Nascimento.zip"
 all_rows = []
 header_main = None
 
@@ -37,7 +41,8 @@ df = pd.DataFrame(data, columns=header_main)
 df.to_csv(output_original_file_path, index=False)
 print("Arquivo criado com sucesso!")
 
-
 df = pd.read_csv(output_original_file_path)
 df.rename(columns={ 'OD': 'ODONTOLÓGICA', 'AMB': 'AMBULATORIAL'}, inplace=True)
 df.to_csv(output_edited_file_path, index=False)
+
+compressToZip(output_original_file_path, output_zip_path)

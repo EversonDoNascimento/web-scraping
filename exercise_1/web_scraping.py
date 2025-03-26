@@ -9,7 +9,7 @@ from utils.compressToZip import compressToZip
 
 pdf_dir = '../data/anexos'
 os.makedirs(pdf_dir, exist_ok=True)
-zip_path = '../data/anexos_compactados.zip'
+zip_path = '../data/anexos_compressed.zip'
 response = requests.get('https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos')
 
 if(response.status_code == 200):
