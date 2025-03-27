@@ -1,7 +1,6 @@
-/exercise_1/venv
-/exercise_1/anexos
-/exercise_1/anexos_compactados.zip
-/exercise_2/venv
-/exercise_2/data_transformed.csv
 /venv
-/data
+/data/anexos
+/data/data_transformed.csv
+/data/anexos_compressed.zip
+/data/data_transformed_edited_columns.csv
+/data/Teste_Everson_Do_Nascimento.zip
