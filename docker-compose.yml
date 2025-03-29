@@ -1,0 +1,45 @@
+services:
+  api:
+    build:
+      context: ./exercise_4/backend
+      dockerfile: Dockerfile
+    container_name: flask_api
+    ports:
+      - "5000:5000"
+    environment:
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - ENV=production
+    depends_on:
+      - db
+    volumes:
+      - ./data:/app/data
+
+  db:
+    image: mysql:8.0
+    container_name: db_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./db_data:/var/lib/mysql
+    user: 999:999
+
+  frontend:
+    build:
+      context: ./exercise_4/frontend
+      dockerfile: Dockerfile
+    container_name: vue_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  db_data:
