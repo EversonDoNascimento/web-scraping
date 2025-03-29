@@ -1,10 +1,13 @@
 import os
+import pandas as pd
 from flask_cors import CORS
 from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from database import db
 from models.operators import Operadora
 from sqlalchemy import text, or_
+import time
+
 load_dotenv()
 
 server = Flask(__name__)
@@ -14,10 +17,32 @@ user = os.getenv('DB_USER')
 password = os.getenv('DB_PASSWORD')
 host = os.getenv('DB_HOST')
 dbname = os.getenv('DB_NAME')
+env = os.getenv('ENV')
 
 server.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{user}:{password}@{host}/{dbname}'
 
 db.init_app(server)
+
+for _ in range(10):
+    try:
+        with db.engine_check.connect() as conn:
+            result = conn.execute(text("SHOW DATABASES LIKE 'ans_database'"))
+            if result.first():
+                break
+        print("Aguardando criação do banco...")
+    except:
+        pass
+    time.sleep(3)
+
+
+with server.app_context():
+    db.create_all()
+    if not Operadora.query.first():
+        print("Importando CSV...")
+        df = pd.read_csv("data/ANS/Relatorio_cadop.csv", sep=";", encoding="utf-8",  header=0)
+        df.to_sql("operadoras", con=db.engine, if_exists="append", index=False)
+        print("Dados importados.")
+
 
 @server.route('/search', methods=['GET'])
 def search_operators():
@@ -74,4 +99,4 @@ def test_db():
         return f"Database connection failed: {str(e)}"
 
 if __name__ == "__main__":
-    server.run(debug=True)
+    server.run(host="0.0.0.0", port=5000, debug=True)
