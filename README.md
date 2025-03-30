@@ -143,7 +143,7 @@ pip install -r requirements.txt
 ### Pré-requisitos
 
 - Exercício 1
-  Acesse o diretório `exercise_1` e rode o seguinte comando:
+  Acesse o diretório `exercise_1` e execute o seguinte comando:
 
 ```bash
 cd exercise_1
@@ -151,7 +151,7 @@ python3 web_scraping.py
 ```
 
 - Exercício 2
-  Acesse o diretório `exercise_2` e rode o seguinte comando:
+  Acesse o diretório `exercise_2` e execute o seguinte comando:
 
 ```bash
 cd exercise_2
