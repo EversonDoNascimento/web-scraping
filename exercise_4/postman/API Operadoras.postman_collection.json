@@ -41,6 +41,22 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "healthy",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "test_db_connection",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
