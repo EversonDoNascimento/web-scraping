@@ -140,8 +140,6 @@ pip install -r requirements.txt
 
 ### Rodando os scripts do projeto
 
-### Pré-requisitos
-
 - Exercício 1
   Execute o seguinte comando:
 
@@ -149,12 +147,18 @@ pip install -r requirements.txt
 python3 exercise_1/web_scraping.py
 ```
 
+<strong>Observação: Todos os arquivos estão sendo salvos no diretório `data`
+</strong>
+
 - Exercício 2
   Execute o seguinte comando:
 
 ```bash
 python3 exercise_2/data_transforming.py
 ```
+
+<strong>Observação: Todos os arquivos estão sendo salvos no diretório `data`
+</strong>
 
 - Exercício 3
 
