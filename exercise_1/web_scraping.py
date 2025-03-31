@@ -3,16 +3,20 @@ import requests
 import os
 import sys
 
+
 # Adiciona o diretório pai ao path para permitir importar o módulo utilitário
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.compressToZip import compressToZip  # Função responsável por comprimir arquivos em .zip
 
+# Pega o diretório onde o script está localizado
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 # Define o diretório onde os arquivos PDF serão salvos
-pdf_dir = '../data/anexos'
+pdf_dir = os.path.join(script_dir, '..', 'data', 'anexos')
 os.makedirs(pdf_dir, exist_ok=True)  # Cria o diretório se ele ainda não existir
 
 # Caminho do arquivo zip final
-zip_path = '../data/anexos_compressed.zip'
+zip_path = os.path.join(script_dir, '..', 'data', 'anexos_compressed.zip')
 
 # Realiza a requisição HTTP para acessar a página da ANS
 response = requests.get('https://www.gov.br/ans/pt-br/acesso-a-informacao/participacao-da-sociedade/atualizacao-do-rol-de-procedimentos')

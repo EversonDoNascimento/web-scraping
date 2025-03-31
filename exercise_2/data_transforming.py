@@ -7,11 +7,15 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.compressToZip import compressToZip  # Função para comprimir arquivos em .zip
 
+# Pega o diretório onde o script está localizado
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 # Caminhos de entrada e saída
-path_pdf = "../data/anexos/anexo_I.pdf"
-output_original_file_path = "../data/data_transformed.csv"
-output_edited_file_path = "../data/data_transformed_edited_columns.csv"
-output_zip_path = "../data/Teste_Everson_Do_Nascimento.zip"
+path_pdf = os.path.join(script_dir, '..', 'data', 'anexos', 'anexo_I.pdf')
+
+output_original_file_path = os.path.join(script_dir, '..', 'data', 'data_transformed.csv')
+output_edited_file_path = os.path.join(script_dir, '..', 'data', 'data_transformed_edited_columns.csv')
+output_zip_path = os.path.join(script_dir, '..', 'data', 'Teste_Everson_Do_Nascimento.zip')
 
 all_rows = []        # Lista para armazenar todas as linhas extraídas
 header_main = None   # Armazena o cabeçalho principal (usado como referência)
